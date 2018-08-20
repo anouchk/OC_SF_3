@@ -16,7 +16,9 @@ class AdvertController extends Controller
 	{
 		// On récupère la vue d'index
 		// NomDuBundle:NomDuContrôleur:NomDeLAction
-		$content = $this->get('templating')->render('OCPlatformBundle:Advert:index.html.twig');
+		$content = $this
+			->get('templating')
+			->render('OCPlatformBundle:Advert:index.html.twig', array('nom' => 'winzou'));
 		return new Response ($content);
 	}
 }
