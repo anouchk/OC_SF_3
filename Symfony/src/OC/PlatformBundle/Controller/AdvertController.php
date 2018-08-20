@@ -5,13 +5,18 @@ namespace OC\PlatformBundle\Controller;
 // Notre contrôleur va utiliser l'objet Response, il faut donc le définir grâce au use :
 use Symfony\Component\HttpFoundation\Response;
 
+// Pour accéder aux méthodes de gestion des templates, nous allons faire hériter notre contrôleur du contrôleur de base de Symfony, qui apporte quelques méthodes bien pratiques dont nous nous servirons tout au long de ce cours. 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 // Le nom de notre contrôleur respecte le nom du fichier pour que l'autoload fonctionne :
-class AdvertController
+class AdvertController extends Controller
 {
 	// On définit la méthodeindexAction(). N'oubliez pas de mettre le suffixeActionderrière le nom de la méthode :
 	public function indexAction()
 	{
-		// On crée une réponse toute simple. L'argument de l'objet Response est le contenu de la page que vous envoyez au visiteur, ici « Notre propre Hello World ! ». Puis on retourne cet objet :
-		return new Response ("Notre propre Hello World !");
+		// On récupère la vue d'index
+		// NomDuBundle:NomDuContrôleur:NomDeLAction
+		$content = $this->get('templating')->render('OCPlatformBundle:Advert:index.html.twig');
+		return new Response ($content);
 	}
 }
