@@ -9,6 +9,11 @@ oc_platform_home:
 oc_platform_view:
     path:      /platform/advert/{id}
     defaults: { _controller: OCPlatformBundle:Advert:view }
+
+oc_platform_view_slug:
+    path:      /platform/{year}/{slug}.{format}
+    defaults:
+        _controller: OCPlatformBundle:Advert:viewSlug
     
 oc_platform_add:
     path:      /platform/add
