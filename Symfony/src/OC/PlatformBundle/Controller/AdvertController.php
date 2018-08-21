@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 // Le nom de notre contrôleur respecte le nom du fichier pour que l'autoload fonctionne :
 class AdvertController extends Controller
 {
-	// On définit la méthodeindexAction(). N'oubliez pas de mettre le suffixeActionderrière le nom de la méthode :
+	// On définit la méthodeindexAction(). N'oubliez pas de mettre le suffixe Action derrière le nom de la méthode :
 	public function indexAction()
 	{
 		// On récupère la vue d'index
@@ -19,6 +19,16 @@ class AdvertController extends Controller
 		$content = $this
 			->get('templating')
 			->render('OCPlatformBundle:Advert:index.html.twig', array('nom' => 'winzou'));
+		return new Response ($content);
+	}
+
+	public function byebyeAction()
+	{
+		// On récupère la vue de byebye
+		// NomDuBundle:NomDuContrôleur:NomDeLAction
+		$content = $this
+			->get('templating')
+			->render('OCPlatformBundle:Advert:byebye.html.twig', array('nom' => 'Tchao'));
 		return new Response ($content);
 	}
 }
