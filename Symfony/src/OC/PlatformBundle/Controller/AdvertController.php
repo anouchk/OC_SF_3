@@ -54,8 +54,7 @@ class AdvertController extends Controller
     public function viewSlugAction($slug, $year, $_format)
     {
         return new Response(
-            "On pourrait afficher l'annonce correspondant au
-            slug '".$slug."', créée en ".$year." et au format ".$_format."."
+            "On pourrait afficher l'annonce correspondant au slug '".$slug."', créée en ".$year." et au format ".$_format."."
         );
     }
 }
