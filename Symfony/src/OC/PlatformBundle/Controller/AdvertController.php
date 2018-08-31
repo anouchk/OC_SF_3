@@ -47,7 +47,8 @@ class AdvertController extends Controller
 	// on doit donc définir la méthode viewAction.
 	// On donne à cette méthode l'argument $id, pour
 	// correspondre au paramètre {id} de la route
-
+	// Vous avez accès à la requête HTTP via $request
+	// On injecte la requête dans les arguments de la méthode
 	public function viewAction($id, Request $request))
 
 	{
@@ -56,7 +57,11 @@ class AdvertController extends Controller
 	    // l'annonce correspondant à l'id $id.
 	    // Puis on passera l'annonce à la vue pour
 	    // qu'elle puisse l'afficher
-		return new Response("Affichage de l'annonce d'id : ".$id);
+
+	    // On récupère notre paramètre tag
+    	$tag = $request->query->get('tag');
+
+		return new Response("Affichage de l'annonce d'id : ".$id", avec le tag : ".$tag);
 
 	}
 
