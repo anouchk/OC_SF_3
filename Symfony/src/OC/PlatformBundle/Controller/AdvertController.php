@@ -4,6 +4,8 @@ namespace OC\PlatformBundle\Controller;
 
 // Notre contrôleur va utiliser l'objet Response, il faut donc le définir grâce au use :
 use Symfony\Component\HttpFoundation\Response;
+// Idem avec l'objet Request
+use Symfony\Component\HttpFoundation\Request;
 
 // Pour accéder aux méthodes de gestion des templates, nous allons faire hériter notre contrôleur du contrôleur de base de Symfony, qui apporte quelques méthodes bien pratiques dont nous nous servirons tout au long de ce cours. 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,7 +20,7 @@ class AdvertController extends Controller
 		// NomDuBundle:NomDuContrôleur:NomDeLAction
 		// $content = $this
 		// 	->get('templating')
-		// 	->render('OCPlatformBundle:Advert:index.html.twig', array('nom' => 'winzou'));
+		// 	->render('OCPlatformBundle:Advert:index.html.twig', arexray('nom' => 'winzou'));
 		// return new Response ($content);
 
 		// On veut avoir l'URL de l'annonce d'id 5.
@@ -46,7 +48,7 @@ class AdvertController extends Controller
 	// On donne à cette méthode l'argument $id, pour
 	// correspondre au paramètre {id} de la route
 
-	public function viewAction($id)
+	public function viewAction($id, Request $request))
 
 	{
 	    // $id vaut 5 si l'on a appelé l'URL /platform/advert/5
