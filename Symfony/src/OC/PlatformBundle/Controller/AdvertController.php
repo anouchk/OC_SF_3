@@ -49,7 +49,7 @@ class AdvertController extends Controller
 	// correspondre au paramètre {id} de la route
 	// Vous avez accès à la requête HTTP via $request
 	// On injecte la requête dans les arguments de la méthode
-	public function viewAction($id, Request $request))
+	public function viewAction($id, Request $request)
 
 	{
 	    // $id vaut 5 si l'on a appelé l'URL /platform/advert/5
@@ -61,7 +61,7 @@ class AdvertController extends Controller
 	    // On récupère notre paramètre tag
     	$tag = $request->query->get('tag');
 
-		return new Response("Affichage de l'annonce d'id : ".$id", avec le tag : ".$tag);
+		return new Response("Affichage de l'annonce d'id : ".$id", avec le tag : ".$tag );
 
 	}
 
