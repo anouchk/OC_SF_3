@@ -43,12 +43,21 @@ class AdvertController extends Controller
 		return new Response ($content);
 	}
 
+	/**
 	// La route fait appel à OCPlatformBundle:Advert:view,
 	// on doit donc définir la méthode viewAction.
 	// On donne à cette méthode l'argument $id, pour
 	// correspondre au paramètre {id} de la route
 	// Vous avez accès à la requête HTTP via $request
 	// On injecte la requête dans les arguments de la méthode
+
+	* @Route("/advert/{id}", name="oc_platform_view", requirements={"id"= "\d+""} )
+	* @param $id
+	* @param Request $request
+	*
+	* @return Response
+
+	*/
 	public function viewAction($id, Request $request)
 
 	{
