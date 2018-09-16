@@ -6,6 +6,7 @@ namespace OC\PlatformBundle\Controller;
 use Symfony\Component\HttpFoundation\Response;
 // Idem avec l'objet Request
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 // Pour accéder aux méthodes de gestion des templates, nous allons faire hériter notre contrôleur du contrôleur de base de Symfony, qui apporte quelques méthodes bien pratiques dont nous nous servirons tout au long de ce cours. 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,6 +14,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 // Le nom de notre contrôleur respecte le nom du fichier pour que l'autoload fonctionne :
 class AdvertController extends Controller
 {
+
+	 /**
+     * @Route("/toto", name="toto")
+     */
+    public function annotationAction(Request $request)
+    {
+        echo $_GET['prenom'];
+        echo $request->query->get('prenom');
+        return new Response('test');
+    }
+
 	// On définit la méthodeindexAction(). N'oubliez pas de mettre le suffixe Action derrière le nom de la méthode :
 	public function indexAction()
 	{
@@ -51,7 +63,7 @@ class AdvertController extends Controller
 	// Vous avez accès à la requête HTTP via $request
 	// On injecte la requête dans les arguments de la méthode
 
-	* @Route("/advert/{id}", name="oc_platform_view", requirements={"id"= "\d+""} )
+	* @Route("/advert/{id}", name="oc_platform_view", requirements={"id"= "\d+"} )
 	* @param $id
 	* @param Request $request
 	*
@@ -84,4 +96,6 @@ class AdvertController extends Controller
             "On pourrait afficher l'annonce correspondant au slug '".$slug."', créée en ".$year." et au format ".$_format."."
         );
     }
+
+    
 }
