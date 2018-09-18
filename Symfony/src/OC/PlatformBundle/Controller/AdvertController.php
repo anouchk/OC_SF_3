@@ -29,6 +29,9 @@ class AdvertController extends Controller
         // à tester avecl'adresse http://localhost:8888/projets_symfony/Symfony/web/app_dev.php/platform/toto?prenom=saysa
     }
 
+    /**
+    * @Route("/{page}", name="oc_platform_home", requirements={"page"="\d*"})
+    */
 	// On définit la méthodeindexAction(). N'oubliez pas de mettre le suffixe Action derrière le nom de la méthode :
 	public function indexAction()
 	{
@@ -49,6 +52,9 @@ class AdvertController extends Controller
         return new Response("L'URL de l'annonce d'id 5 est : ".$url);
 	}
 
+	/**
+    * @Route("/bye", name="oc_platform_bye")
+    */
 	public function byebyeAction()
 	{
 		// On récupère la vue de byebye
@@ -95,6 +101,9 @@ class AdvertController extends Controller
 
 	// On récupère tous les paramètres en arguments de la méthode
 
+	/**
+    * @Route("/viewslug", name="oc_platform_viewslug")
+    */
     public function viewSlugAction($slug, $year, $_format)
     {
         return new Response(
