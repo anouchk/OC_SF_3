@@ -20,9 +20,13 @@ class AdvertController extends Controller
      */
     public function annotationAction(Request $request)
     {
+    	// un "get" old school
         echo $_GET['prenom'];
+        // un "get" en Symfony
         echo $request->query->get('prenom');
+        // Il faut toujours renvoyer une réponse
         return new Response('test');
+        // à tester avecl'adresse http://localhost:8888/projets_symfony/Symfony/web/app_dev.php/platform/toto?prenom=saysa
     }
 
 	// On définit la méthodeindexAction(). N'oubliez pas de mettre le suffixe Action derrière le nom de la méthode :
@@ -86,6 +90,7 @@ class AdvertController extends Controller
       		'id'  => $id,
       		'tag' => $tag,
       	));
+     	// A tester avec l'adresse http://localhost:8888/projets_symfony/Symfony/web/app_dev.php/platform/advert/5?tag=developer
 	}
 
 	// On récupère tous les paramètres en arguments de la méthode
