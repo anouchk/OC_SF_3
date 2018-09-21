@@ -90,13 +90,16 @@ class AdvertController extends Controller
 	    // qu'elle puisse l'afficher
 
 	    // On récupère notre paramètre tag
-    	$tag = $request->query->get('tag');
+    	// $tag = $request->query->get('tag');
 
-    	return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
-      		'id'  => $id,
-      		'tag' => $tag,
-      	));
+    	// return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
+     //  		'id'  => $id,
+     //  		'tag' => $tag,
+     //  	));
      	// A tester avec l'adresse http://localhost:8888/projets_symfony/Symfony/web/app_dev.php/platform/advert/5?tag=developer
+
+     	// testons les redirections :
+     	return $this->redirectToRoute('oc_platform_home');
 	}
 
 	// On récupère tous les paramètres en arguments de la méthode
