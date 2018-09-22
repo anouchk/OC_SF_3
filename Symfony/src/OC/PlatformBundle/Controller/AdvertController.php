@@ -115,7 +115,9 @@ class AdvertController extends Controller
     }
 
     // Ajoutez cette méthode :
-
+    /**
+    * @Route("/add", name="oc_platform_add")
+    */
 	public function addAction(Request $request)
 
 	{
