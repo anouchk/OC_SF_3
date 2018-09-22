@@ -90,7 +90,7 @@ class AdvertController extends Controller
 	    // qu'elle puisse l'afficher
 
 	    // On récupère notre paramètre tag
-    	// $tag = $request->query->get('tag');
+    	$tag = $request->query->get('tag');
 
     	return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
       		'id'  => $id,
