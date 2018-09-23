@@ -30,29 +30,6 @@ class AdvertController extends Controller
     }
 
     /**
-    * @Route("/{page}", name="oc_platform_home", requirements={"page"="\d*"})
-    */
-	// On définit la méthodeindexAction(). N'oubliez pas de mettre le suffixe Action derrière le nom de la méthode :
-	public function indexAction()
-	{
-		// On récupère la vue d'index
-		// NomDuBundle:NomDuContrôleur:NomDeLAction
-		// $content = $this
-		// 	->get('templating')
-		// 	->render('OCPlatformBundle:Advert:index.html.twig', arexray('nom' => 'winzou'));
-		// return new Response ($content);
-
-		// On veut avoir l'URL de l'annonce d'id 5.
-        $url = $this->get('router')->generate(
-            'oc_platform_view', // 1er argument : le nom de la route
-            array('id' => 5)    // 2e argument : les valeurs des paramètres
-        );
-        // $url vaut « /platform/advert/5 »
-
-        return new Response("L'URL de l'annonce d'id 5 est : ".$url);
-	}
-
-	/**
     * @Route("/bye", name="oc_platform_bye")
     */
 	public function byebyeAction()
@@ -66,6 +43,52 @@ class AdvertController extends Controller
 	}
 
 	/**
+    * @Route("/viewslug", name="oc_platform_viewslug")
+    */
+    public function viewSlugAction($slug, $year, $_format)
+    {
+        return new Response(
+            "On pourrait afficher l'annonce correspondant au slug '".$slug."', créée en ".$year." et au format ".$_format."."
+        );
+    }
+
+    /**
+    * @Route("/{page}", name="oc_platform_home", requirements={"page"="\d*"})
+    */
+	// On définit la méthodeindexAction(). N'oubliez pas de mettre le suffixe Action derrière le nom de la méthode :
+	public function indexAction($page)
+	{
+		// On récupère la vue d'index
+		// NomDuBundle:NomDuContrôleur:NomDeLAction
+		// $content = $this
+		// 	->get('templating')
+		// 	->render('OCPlatformBundle:Advert:index.html.twig', array('nom' => 'winzou'));
+		// return new Response ($content);
+
+		// On veut avoir l'URL de l'annonce d'id 5.
+        // $url = $this->get('router')->generate(
+        //     'oc_platform_view', // 1er argument : le nom de la route
+        //     array('id' => 5)    // 2e argument : les valeurs des paramètres
+        // );
+        // $url vaut « /platform/advert/5 »
+        // return new Response("L'URL de l'annonce d'id 5 est : ".$url);
+
+        // On ne sait pas combien de pages il y a
+    	// Mais on sait qu'une page doit être supérieure ou égale à 1
+    	if ($page < 1) {
+      	// On déclenche une exception NotFoundHttpException, cela va afficher
+      	// une page d'erreur 404 (qu'on pourra personnaliser plus tard d'ailleurs)
+      	throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
+    	}
+
+	    // Ici, on récupérera la liste des annonces, puis on la passera au template
+
+	    // Mais pour l'instant, on ne fait qu'appeler le template
+	    return $this->render('OCPlatformBundle:Advert:index.html.twig');
+        
+	}
+
+	/**
 	// La route fait appel à OCPlatformBundle:Advert:view,
 	// on doit donc définir la méthode viewAction.
 	// On donne à cette méthode l'argument $id, pour
@@ -74,11 +97,6 @@ class AdvertController extends Controller
 	// On injecte la requête dans les arguments de la méthode
 
 	* @Route("/advert/{id}", name="oc_platform_view", requirements={"id"= "\d+"} )
-	* @param $id
-	* @param Request $request
-	*
-	* @return Response
-
 	*/
 	public function viewAction($id, Request $request)
 
@@ -90,48 +108,87 @@ class AdvertController extends Controller
 	    // qu'elle puisse l'afficher
 
 	    // On récupère notre paramètre tag
-    	$tag = $request->query->get('tag');
+    	// $tag = $request->query->get('tag');
 
-    	return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
-      		'id'  => $id,
-      		'tag' => $tag,
-      	));
+    	// return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
+	    //  		'id'  => $id,
+	    //  		'tag' => $tag,
+	    //  	));
      	// A tester avec l'adresse http://localhost:8888/projets_symfony/Symfony/web/app_dev.php/platform/advert/5?tag=developer
 
      	// testons les redirections :
      	// return $this->redirectToRoute('oc_platform_home');
+
+     	// Ici, on récupérera l'annonce correspondante à l'id $id
+
+	    return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
+	      'id' => $id
+	    ));
 	}
 
-	// On récupère tous les paramètres en arguments de la méthode
-
-	/**
-    * @Route("/viewslug", name="oc_platform_viewslug")
-    */
-    public function viewSlugAction($slug, $year, $_format)
-    {
-        return new Response(
-            "On pourrait afficher l'annonce correspondant au slug '".$slug."', créée en ".$year." et au format ".$_format."."
-        );
-    }
-
-    // Ajoutez cette méthode :
     /**
     * @Route("/add", name="oc_platform_add")
     */
 	public function addAction(Request $request)
 
 	{
-    $session = $request->getSession();
-    // Bien sûr, cette méthode devra réellement ajouter l'annonce
-    // Mais faisons comme si c'était le cas
+    // $session = $request->getSession();
+    // // Bien sûr, cette méthode devra réellement ajouter l'annonce
+    // // Mais faisons comme si c'était le cas
 
-    $session->getFlashBag()->add('info', 'Annonce bien enregistrée');
-    // Le « flashBag » est ce qui contient les messages flash dans la session
-    // Il peut bien sûr contenir plusieurs messages :
-    $session->getFlashBag()->add('info', 'Oui oui, elle est bien enregistrée !');
-    // Puis on redirige vers la page de visualisation de cette annonce
-    return $this->redirectToRoute('oc_platform_view', array('id' => 5));
+    // $session->getFlashBag()->add('info', 'Annonce bien enregistrée');
+    // // Le « flashBag » est ce qui contient les messages flash dans la session
+    // // Il peut bien sûr contenir plusieurs messages :
+    // $session->getFlashBag()->add('info', 'Oui oui, elle est bien enregistrée !');
+    // // Puis on redirige vers la page de visualisation de cette annonce
+    // return $this->redirectToRoute('oc_platform_view', array('id' => 5));
+    
+	// La gestion d'un formulaire est particulière, mais l'idée est la suivante :
+    // Si la requête est en POST, c'est que le visiteur a soumis le formulaire
+    if ($request->isMethod('POST')) {
+      // Ici, on s'occupera de la création et de la gestion du formulaire
+      $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+      // Puis on redirige vers la page de visualisation de cettte annonce
+      return $this->redirectToRoute('oc_platform_view', array('id' => 5));
     }
 
+    // Si on n'est pas en POST, alors on affiche le formulaire
+    return $this->render('OCPlatformBundle:Advert:add.html.twig');
+    }
+
+	/**
+    * @Route("/edit/{id}", name="oc_platform_edit", requirements={"id"= "\d+"})
+    */
+	public function editAction(Request $request)
+
+	{
+		// Ici, on récupérera l'annonce correspondante à $id
+
+	    // Même mécanisme que pour l'ajout
+
+	    if ($request->isMethod('POST')) {
+	    	// Ici, on s'occupera de la création et de la gestion du formulaire
+	        $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
+	        // Puis on redirige vers la page de visualisation de cettte annonce
+	        return $this->redirectToRoute('oc_platform_view', array('id' => 5));
+    	}
+    // Si on n'est pas en POST, alors on affiche le formulaire
+    return $this->render('OCPlatformBundle:Advert:edit.html.twig');
+    
+    }
+
+	/**
+    * @Route("/delete/{id}", name="oc_platform_delete", requirements={"id"= "\d+"})
+    */
+	public function deleteAction(Request $request)
+
+	{
+		// Ici, on récupérera l'annonce correspondant à $id
+
+	    // Ici, on gérera la suppression de l'annonce en question
+
+	    return $this->render('OCPlatformBundle:Advert:delete.html.twig');
+	    
+    }
     
 }
