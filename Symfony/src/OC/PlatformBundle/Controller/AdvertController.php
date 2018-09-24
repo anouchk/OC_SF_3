@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 // Idem avec l'objet Request
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 // Pour accéder aux méthodes de gestion des templates, nous allons faire hériter notre contrôleur du contrôleur de base de Symfony, qui apporte quelques méthodes bien pratiques dont nous nous servirons tout au long de ce cours. 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -120,7 +121,6 @@ class AdvertController extends Controller
      	// return $this->redirectToRoute('oc_platform_home');
 
      	// Ici, on récupérera l'annonce correspondante à l'id $id
-
 	    return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
 	      'id' => $id
 	    ));
