@@ -43,37 +43,11 @@ class AdvertController extends Controller
 		return new Response ($content);
 	}
 
-	/**
-    * @Route("/viewslug", name="oc_platform_viewslug")
-    */
-    public function viewSlugAction($slug, $year, $_format)
-    {
-        return new Response(
-            "On pourrait afficher l'annonce correspondant au slug '".$slug."', créée en ".$year." et au format ".$_format."."
-        );
-    }
-
     /**
     * @Route("/{page}", name="oc_platform_home", requirements={"page"="\d*"})
     */
-	// On définit la méthodeindexAction(). N'oubliez pas de mettre le suffixe Action derrière le nom de la méthode :
 	public function indexAction($page)
 	{
-		// On récupère la vue d'index
-		// NomDuBundle:NomDuContrôleur:NomDeLAction
-		// $content = $this
-		// 	->get('templating')
-		// 	->render('OCPlatformBundle:Advert:index.html.twig', array('nom' => 'winzou'));
-		// return new Response ($content);
-
-		// On veut avoir l'URL de l'annonce d'id 5.
-        // $url = $this->get('router')->generate(
-        //     'oc_platform_view', // 1er argument : le nom de la route
-        //     array('id' => 5)    // 2e argument : les valeurs des paramètres
-        // );
-        // $url vaut « /platform/advert/5 »
-        // return new Response("L'URL de l'annonce d'id 5 est : ".$url);
-
         // On ne sait pas combien de pages il y a
     	// Mais on sait qu'une page doit être supérieure ou égale à 1
     	if ($page < 1) {
@@ -85,56 +59,38 @@ class AdvertController extends Controller
 	    // Ici, on récupérera la liste des annonces, puis on la passera au template
 	    // Notre liste d'annonce en dur
 
-    $listAdverts = array(
+	    $listAdverts = array(
 
-      array(
+	      array(
+	        'title'   => 'Recherche développpeur Symfony',
+	        'id'      => 1,
+	        'author'  => 'Alexandre',
+	        'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
+	        'date'    => new \Datetime()
+	      ),
 
-        'title'   => 'Recherche développpeur Symfony',
+	      array(
+	        'title'   => 'Mission de webmaster',
+	        'id'      => 2,
+	        'author'  => 'Hugo',
+	        'content' => 'Nous recherchons un webmaster capable de maintenir notre site internet. Blabla…',
+	        'date'    => new \Datetime()
+	      ),
 
-        'id'      => 1,
+	      array(
+	        'title'   => 'Offre de stage webdesigner',
+	        'id'      => 3,
+	        'author'  => 'Mathieu',
+	        'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
+	        'date'    => new \Datetime()
+	      )
+	    );
 
-        'author'  => 'Alexandre',
-
-        'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
-
-        'date'    => new \Datetime()),
-
-      array(
-
-        'title'   => 'Mission de webmaster',
-
-        'id'      => 2,
-
-        'author'  => 'Hugo',
-
-        'content' => 'Nous recherchons un webmaster capable de maintenir notre site internet. Blabla…',
-
-        'date'    => new \Datetime()),
-
-      array(
-
-        'title'   => 'Offre de stage webdesigner',
-
-        'id'      => 3,
-
-        'author'  => 'Mathieu',
-
-        'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
-
-        'date'    => new \Datetime())
-
-    );
-
-
-    // Et modifiez le 2nd argument pour injecter notre liste
-
-    return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
-
-      'listAdverts' => $listAdverts
-
-    ));
-
-        
+	    // Et modifiez le 2nd argument pour injecter notre liste
+	    $page = 1;
+	    return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
+	      'listAdverts' => $listAdverts
+	    ));        
 	}
 
 	/**
@@ -150,24 +106,6 @@ class AdvertController extends Controller
 	public function viewAction($id, Request $request)
 
 	{
-	    // $id vaut 5 si l'on a appelé l'URL /platform/advert/5
-	    // Ici, on récupèrera depuis la base de données
-	    // l'annonce correspondant à l'id $id.
-	    // Puis on passera l'annonce à la vue pour
-	    // qu'elle puisse l'afficher
-
-	    // On récupère notre paramètre tag
-    	// $tag = $request->query->get('tag');
-
-    	// return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
-	    //  		'id'  => $id,
-	    //  		'tag' => $tag,
-	    //  	));
-     	// A tester avec l'adresse http://localhost:8888/projets_symfony/Symfony/web/app_dev.php/platform/advert/5?tag=developer
-
-     	// testons les redirections :
-     	// return $this->redirectToRoute('oc_platform_home');
-
      	// Ici, on récupérera l'annonce correspondante à l'id $id
 	    return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
 	      'id' => $id
@@ -180,17 +118,6 @@ class AdvertController extends Controller
 	public function addAction(Request $request)
 
 	{
-    // $session = $request->getSession();
-    // // Bien sûr, cette méthode devra réellement ajouter l'annonce
-    // // Mais faisons comme si c'était le cas
-
-    // $session->getFlashBag()->add('info', 'Annonce bien enregistrée');
-    // // Le « flashBag » est ce qui contient les messages flash dans la session
-    // // Il peut bien sûr contenir plusieurs messages :
-    // $session->getFlashBag()->add('info', 'Oui oui, elle est bien enregistrée !');
-    // // Puis on redirige vers la page de visualisation de cette annonce
-    // return $this->redirectToRoute('oc_platform_view', array('id' => 5));
-    
 	// La gestion d'un formulaire est particulière, mais l'idée est la suivante :
     // Si la requête est en POST, c'est que le visiteur a soumis le formulaire
     if ($request->isMethod('POST')) {
@@ -242,30 +169,19 @@ class AdvertController extends Controller
     public function menuAction($limit)
 
   {
-
     // On fixe en dur une liste ici, bien entendu par la suite
-
     // on la récupérera depuis la BDD !
 
     $listAdverts = array(
-
       array('id' => 2, 'title' => 'Recherche développeur Symfony'),
-
       array('id' => 5, 'title' => 'Mission de webmaster'),
-
       array('id' => 9, 'title' => 'Offre de stage webdesigner')
-
     );
 
-
     return $this->render('OCPlatformBundle:Advert:menu.html.twig', array(
-
       // Tout l'intérêt est ici : le contrôleur passe
-
       // les variables nécessaires au template !
-
       'listAdverts' => $listAdverts
-
     ));
 
   }
