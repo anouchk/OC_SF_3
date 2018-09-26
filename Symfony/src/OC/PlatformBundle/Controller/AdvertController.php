@@ -194,7 +194,7 @@ class AdvertController extends Controller
 	    
     }
 
-    public function menuAction()
+    public function menuAction($limit)
 
   {
 
