@@ -85,7 +85,6 @@ class AdvertController extends Controller
 	    // Ici, on récupérera la liste des annonces, puis on la passera au template
 
 	    // Mais pour l'instant, on ne fait qu'appeler le template
-	    $page = 1;
 	    return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
 			'listAdverts' => array()
 		));
