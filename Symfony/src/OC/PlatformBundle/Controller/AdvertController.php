@@ -46,7 +46,7 @@ class AdvertController extends Controller
     /**
     * @Route("/{page}", name="oc_platform_home", requirements={"page"="\d*"})
     */
-	public function indexAction($page)
+	public function indexAction($page = 1)
 	{
         // On ne sait pas combien de pages il y a
     	// Mais on sait qu'une page doit être supérieure ou égale à 1
@@ -87,7 +87,6 @@ class AdvertController extends Controller
 	    );
 
 	    // Et modifiez le 2nd argument pour injecter notre liste
-	    $page = 1;
 	    return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
 	      'listAdverts' => $listAdverts
 	    ));        
