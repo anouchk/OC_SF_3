@@ -87,7 +87,7 @@ class AdvertController extends Controller
 	    );
 
 	    // Et modifiez le 2nd argument pour injecter notre liste
-	    return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
+	    return $this->render('platform/Advert/index.html.twig', array(
 	      'listAdverts' => $listAdverts
 	    ));        
 	}
