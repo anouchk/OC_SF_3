@@ -181,5 +181,18 @@ class AdvertController extends Controller
             'listAdverts' => $listAdverts
         ));
     }
+
+    /**
+     * @Route("/saysa", name="saysa")
+     */
+    public function saysaAction()
+    {
+
+        $prenom = 'Toto';
+
+        return $this->render('platform/Advert/saysa.html.twig', [
+            'twig_prenom' => $prenom,
+        ]);
+    }
     
 }
