@@ -39,7 +39,7 @@ class AdvertController extends Controller
 		// NomDuBundle:NomDuContrôleur:NomDeLAction
 		$content = $this
 			->get('templating')
-			->render('OCPlatformBundle:Advert:byebye.html.twig', array('nom' => 'Tchao'));
+			->render('platform/Advert/byebye.html.twig', array('nom' => 'Tchao'));
 		return new Response ($content);
 	}
 
@@ -106,7 +106,7 @@ class AdvertController extends Controller
 
 	{
      	// Ici, on récupérera l'annonce correspondante à l'id $id
-	    return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
+	    return $this->render('platform/Advert/view.html.twig', array(
 	      'id' => $id
 	    ));
 	}
@@ -127,7 +127,7 @@ class AdvertController extends Controller
     }
 
     // Si on n'est pas en POST, alors on affiche le formulaire
-    return $this->render('OCPlatformBundle:Advert:add.html.twig');
+    return $this->render('platform/Advert/add.html.twig');
     }
 
 	/**
@@ -147,7 +147,7 @@ class AdvertController extends Controller
 	        return $this->redirectToRoute('oc_platform_view', array('id' => 5));
     	}
     // Si on n'est pas en POST, alors on affiche le formulaire
-    return $this->render('OCPlatformBundle:Advert:edit.html.twig');
+    return $this->render('platform/Advert/edit.html.twig');
     
     }
 
@@ -161,28 +161,25 @@ class AdvertController extends Controller
 
 	    // Ici, on gérera la suppression de l'annonce en question
 
-	    return $this->render('OCPlatformBundle:Advert:delete.html.twig');
+	    return $this->render('platform/Advert/delete.html.twig');
 	    
     }
 
-    public function menuAction($limit, $listAdverts)
+    public function menuAction($limit)
+    {
+        // On fixe en dur une liste ici, bien entendu par la suite
+        // on la récupérera depuis la BDD !
+        $listAdverts = array(
+            array('id' => 2, 'title' => 'Recherche développeur Symfony '. $limit),
+            array('id' => 5, 'title' => 'Mission de webmaster'),
+            array('id' => 9, 'title' => 'Offre de stage webdesigner')
+        );
 
-  {
-    // On fixe en dur une liste ici, bien entendu par la suite
-    // on la récupérera depuis la BDD !
-
-    $listAdverts = array(
-      array('id' => 2, 'title' => 'Recherche développeur Symfony'),
-      array('id' => 5, 'title' => 'Mission de webmaster'),
-      array('id' => 9, 'title' => 'Offre de stage webdesigner')
-    );
-
-    return $this->render('OCPlatformBundle:Advert:menu.html.twig', array(
-      // Tout l'intérêt est ici : le contrôleur passe
-      // les variables nécessaires au template !
-      'listAdverts' => $listAdverts
-    ));
-
-  }
+        return $this->render('platform/Advert/menu.html.twig', array(
+            // Tout l'intérêt est ici : le contrôleur passe
+            // les variables nécessaires au template !
+            'listAdverts' => $listAdverts
+        ));
+    }
     
 }
