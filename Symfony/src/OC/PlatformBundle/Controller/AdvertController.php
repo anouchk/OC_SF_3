@@ -105,9 +105,16 @@ class AdvertController extends Controller
 	public function viewAction($id, Request $request)
 
 	{
-     	// Ici, on récupérera l'annonce correspondante à l'id $id
+		$advert = array(
+		    'title'   => 'Recherche développpeur Symfony2',
+		    'id'      => $id,
+		    'author'  => 'Alexandre',
+		    'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
+		    'date'    => new \Datetime()
+	    );
+
 	    return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
-	      'id' => $id
+	      'advert' => $advert
 	    ));
 	}
 
