@@ -140,12 +140,20 @@ class AdvertController extends Controller
 	/**
     * @Route("/edit/{id}", name="oc_platform_edit", requirements={"id"= "\d+"})
     */
-	public function editAction(Request $request)
+	public function editAction($id, Request $request)
 
 	{
 		// Ici, on récupérera l'annonce correspondante à $id
 
 	    // Même mécanisme que pour l'ajout
+
+	    $advert = array(
+	      'title'   => 'Recherche développpeur Symfony',
+	      'id'      => $id,
+	      'author'  => 'Alexandre',
+	      'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
+	      'date'    => new \Datetime()
+	    );
 
 	    if ($request->isMethod('POST')) {
 	    	// Ici, on s'occupera de la création et de la gestion du formulaire
@@ -153,9 +161,10 @@ class AdvertController extends Controller
 	        // Puis on redirige vers la page de visualisation de cettte annonce
 	        return $this->redirectToRoute('oc_platform_view', array('id' => 5));
     	}
-    // Si on n'est pas en POST, alors on affiche le formulaire
-    return $this->render('OCPlatformBundle:Advert:edit.html.twig');
-    
+	    // Si on n'est pas en POST, alors on affiche le formulaire
+	    return $this->render('OCPlatformBundle:Advert:edit.html.twig', array(
+	      'advert' => $advert
+	  	));  
     }
 
 	/**
