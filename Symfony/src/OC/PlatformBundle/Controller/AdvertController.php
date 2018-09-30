@@ -165,7 +165,7 @@ class AdvertController extends Controller
 	    
     }
 
-    public function menuAction($limit, $listAdverts)
+    public function menuAction($limit)
 
   {
     // On fixe en dur une liste ici, bien entendu par la suite
