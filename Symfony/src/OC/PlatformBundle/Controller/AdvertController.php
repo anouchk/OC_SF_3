@@ -39,7 +39,7 @@ class AdvertController extends Controller
 		// NomDuBundle:NomDuContrôleur:NomDeLAction
 		$content = $this
 			->get('templating')
-			->render('OCPlatformBundle:Advert:byebye.html.twig', array('nom' => 'Tchao'));
+			->render('platform/Advert/byebye.html.twig', array('nom' => 'Tchao'));
 		return new Response ($content);
 	}
 
@@ -87,7 +87,7 @@ class AdvertController extends Controller
 	    );
 
 	    // Et modifiez le 2nd argument pour injecter notre liste
-	    return $this->render('OCPlatformBundle:Advert:index.html.twig', array(
+	    return $this->render('platform/Advert/index.html.twig', array(
 	      'listAdverts' => $listAdverts
 	    ));        
 	}
@@ -113,7 +113,7 @@ class AdvertController extends Controller
 		    'date'    => new \Datetime()
 	    );
 
-	    return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
+	    return $this->render('platform/Advert:view.html.twig', array(
 	      'advert' => $advert
 	    ));
 	}
@@ -134,7 +134,7 @@ class AdvertController extends Controller
     }
 
     // Si on n'est pas en POST, alors on affiche le formulaire
-    return $this->render('OCPlatformBundle:Advert:add.html.twig');
+    return $this->render('platform/Advert/add.html.twig');
     }
 
 	/**
@@ -162,7 +162,7 @@ class AdvertController extends Controller
 	        return $this->redirectToRoute('oc_platform_view', array('id' => 5));
     	}
 	    // Si on n'est pas en POST, alors on affiche le formulaire
-	    return $this->render('OCPlatformBundle:Advert:edit.html.twig', array(
+	    return $this->render('platform/Advert/edit.html.twig', array(
 	      'advert' => $advert
 	  	));  
     }
@@ -177,7 +177,7 @@ class AdvertController extends Controller
 
 	    // Ici, on gérera la suppression de l'annonce en question
 
-	    return $this->render('OCPlatformBundle:Advert:delete.html.twig');
+	    return $this->render('platform/Advert/delete.html.twig');
 	    
     }
 
@@ -193,7 +193,7 @@ class AdvertController extends Controller
       array('id' => 9, 'title' => 'Offre de stage webdesigner')
     );
 
-    return $this->render('OCPlatformBundle:Advert:menu.html.twig', array(
+    return $this->render('platform/Advert/menu.html.twig', array(
       // Tout l'intérêt est ici : le contrôleur passe
       // les variables nécessaires au template !
       'listAdverts' => $listAdverts
