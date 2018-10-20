@@ -5,3 +5,10 @@ services:
 
     oc_platform.antispam:
         class: OC\PlatformBundle\Antispam\OCAntispam
+        arguments:
+          # le service Mailer (pour envoyer des emails)
+            - "@mailer"
+          #le paramètre locale (pour récupérer la langue, définie dans le fichier app/config/parameters.yml)
+            - %locale%
+          # un nombre
+            - 50
