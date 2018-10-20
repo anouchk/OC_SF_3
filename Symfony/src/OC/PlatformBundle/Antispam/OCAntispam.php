@@ -13,8 +13,8 @@ class OCAntispam
 	   */
 
 	public function isSpam($text)
-	{
+	{ 
+		// c'est un boléen, ça va retourner true ou false :
 	    return strlen($text) < 50;
-
 	}
 }
